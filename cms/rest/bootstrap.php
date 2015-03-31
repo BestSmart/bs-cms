@@ -12,7 +12,7 @@ require_once "Configs.php";
 $user = constant('dbUsername');
 $pass = constant('dbPassword');
 
-$dbh = new PDO('mysql:host=bestsmart.com.br;dbname=bests285_cms', $user, $pass, array(
+$dbh = new PDO('mysql:host='.constant('dbHostName').';dbname='.constant('dbName'), $user, $pass, array(
 	PDO::ATTR_PERSISTENT => true
 		));
 
