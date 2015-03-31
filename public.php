@@ -54,7 +54,7 @@ $parceiros = $entityManager->createQueryBuilder()
 		->from('Model\Parceiro', 'e')
 		->innerJoin('e.album', 'a', 'a.id = e.album_id')
 		->leftJoin('a.imagens', 'i', 'a.id = i.album_id')
-		->where('and i.capa = true')
+		->where('i.capa = true')
 		->getQuery()
 		->getResult();
 $albuns = $entityManager->createQueryBuilder()
