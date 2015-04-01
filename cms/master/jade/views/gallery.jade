@@ -9,9 +9,9 @@
 				span.btn-label
 					i.icon-note
 				| Capa
-		.grid-item(data-src="{{'../'+img.url}}", data-sub-html="{{'#subhtml'+$index}}")
-			img.img-thumbnail.img-responsive(ng-src="{{'../'+img.thumbnail}}")
+		.grid-item(data-src="{{img.url}}", data-sub-html="{{'#subhtml'+$index}}")
+			img.img-thumbnail.img-responsive(ng-src="{{img.thumbnail}}")
 			div(style="display:none;", id="{{'subhtml'+$index}}")
 				.customHtml
 					span
-						a(ng-href="{{'../'+img.url}}", target="_blank") {{img.url}}
+						a(ng-href="{{img.url}}", target="_blank") {{img.url}}

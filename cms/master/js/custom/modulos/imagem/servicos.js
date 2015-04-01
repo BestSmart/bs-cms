@@ -16,7 +16,6 @@ App
 						'album':album
 					});
 				};
-
 				Imagem.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
@@ -32,6 +31,5 @@ App
 					var self = this;
 					return Server.remove({album : self.id});
 				};
-
 				return Imagem;
 			}]);
