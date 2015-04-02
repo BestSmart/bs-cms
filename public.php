@@ -87,7 +87,7 @@ $empresa = $entityManager
 		->from('Model\Empresa', 'e')
 		->where('e.id = 1')
 		->getQuery()
-		->getSingleResult();
+		->getOneOrNullResult();
 $qb = $entityManager->createQueryBuilder();
 $listSessoes = $qb->select('e')
 		->from('Model\Sessao', 'e')
@@ -101,11 +101,13 @@ foreach ($listSessoes as $sessao) {
 
 
 $empresa_tags = [];
-$tags = explode(',', $empresa->getValores());
-foreach ($tags as $key => $value) {
-	$empresa_tags[] = trim($value);
+if ($empresa != NULL) {
+	$tags = explode(',', $empresa->getValores());
+	foreach ($tags as $key => $value) {
+		$empresa_tags[] = trim($value);
+	}
+	$empresa->setValores(array_unique($empresa_tags));
 }
-$empresa->setValores(array_unique($empresa_tags));
 
 $view = $app->view()->getEnvironment();
 $view->addGlobal('base_url', $app->request->getScriptName());
@@ -187,7 +189,7 @@ $app->get('/quemsomos/', function() use ($app) {
 	$app->render('quemsomos.html');
 });
 $app->get('/galeria/', function() use ($app, $albuns) {
-	$app->redirect('galeria/'.$albuns[0]->getNome().'/1');
+	$app->redirect('galeria/' . $albuns[0]->getNome() . '/1');
 });
 $app->get('/galeria/:nome/:pagina', function($nome, $pagina) use ($app, $entityManager) {
 	$maxResult = 10;
