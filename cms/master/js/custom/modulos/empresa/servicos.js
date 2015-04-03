@@ -14,6 +14,7 @@ App
 						this.visao = obj.visao;
 						this.valores = obj.valores;
 						this.dominio = obj.dominio;
+						this.urlLogo = obj.urlLogo;
 						this.telefone = obj.telefone;
 						this.endereco = obj.endereco;
 						this.emailContato = obj.emailContato;

@@ -13,8 +13,9 @@ class ImagemCtrl implements IController {
 	private $imagemRepository;
 	private $albumRepository;
 
-	const IMG_FOLDER = "../../img/uploaded/";
-	const IMG_FOLDER_THUMBNAIL = "../../img/uploaded/thumbnail/";
+	const BASE_IMG_PATH = './../../';
+	const IMG_FOLDER = "img/uploaded/";
+	const IMG_FOLDER_THUMBNAIL = "img/uploaded/thumbnail/";
 
 	function __construct(Printer $printer, EntityManager $entityManager) {
 		$this->printer = $printer;
@@ -24,8 +25,8 @@ class ImagemCtrl implements IController {
 	}
 
 	function removeImage($image) {
-		$thumbnailDestination = realpath($image->getThumbnail());
-		$destination = realpath($image->getUrl());
+		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH . $image->getThumbnail());
+		$destination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH . $image->getUrl());
 		unlink($thumbnailDestination);
 		unlink($destination);
 	}
@@ -43,14 +44,15 @@ class ImagemCtrl implements IController {
 		}
 // *** 3) Save image
 
-		if (!file_exists('./' . self::IMG_FOLDER . $albumId . "/")) {
-			mkdir('./' . self::IMG_FOLDER . $albumId . "/", 0777, true);
+		if (!file_exists(self::BASE_IMG_PATH . self::IMG_FOLDER . $albumId . "/")) {
+			mkdir(self::BASE_IMG_PATH . self::IMG_FOLDER . $albumId . "/", 0777, true);
 		}
-		if (!file_exists('./' . self::IMG_FOLDER_THUMBNAIL . $albumId . "/")) {
-			mkdir('./' . self::IMG_FOLDER_THUMBNAIL . $albumId . "/", 0777, true);
+		if (!file_exists(self::BASE_IMG_PATH . self::IMG_FOLDER_THUMBNAIL . $albumId . "/")) {
+			mkdir(self::BASE_IMG_PATH . self::IMG_FOLDER_THUMBNAIL . $albumId . "/", 0777, true);
 		}
-		$thumbnailDestination = realpath(self::IMG_FOLDER_THUMBNAIL) . "/" . $albumId . "/" . $name;
-		$destination = realpath(self::IMG_FOLDER) . "/" . $albumId . "/" . $name;
+		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::IMG_FOLDER_THUMBNAIL) . "/" . $albumId . "/" . $name;
+		$destination = realpath(self::BASE_IMG_PATH . self::IMG_FOLDER) . "/" . $albumId . "/" . $name;
+		var_dump($destination, $thumbnailDestination);
 		$resizeObj->saveImage($destination, 90);
 
 		$resizeThumbnail = new Resizer($tempName, $ext);

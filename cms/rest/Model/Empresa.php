@@ -48,6 +48,9 @@ class Empresa extends DefaultModel {
 	/** @Column(type="string") * */
 	protected $dominio;
 
+	/** @Column(type="string") * */
+	protected $urlLogo;
+
 	/** @Column(type="string", nullable=true) * */
 	protected $urlGoogleMaps;
 
@@ -217,6 +220,15 @@ class Empresa extends DefaultModel {
 
 	public function setSlogan($slogan) {
 		$this->slogan = $slogan;
+		return $this;
+	}
+
+	public function getUrlLogo() {
+		return $this->urlLogo;
+	}
+
+	public function setUrlLogo($urlLogo) {
+		$this->urlLogo = $urlLogo;
 		return $this;
 	}
 

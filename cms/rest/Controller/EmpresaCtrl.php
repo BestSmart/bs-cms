@@ -70,6 +70,7 @@ class EmpresaCtrl implements IController {
 					->setValores($empresa->getValores())
 					->setIdGoogleAnalytics($empresa->getIdGoogleAnalytics())
 					->setDominio($empresa->getDominio())
+					->setUrlLogo($empresa->getUrlLogo())
 					->setTelefone($empresa->getTelefone())
 					->setEndereco($empresa->getEndereco())
 					->setEmailContato($empresa->getEmailContato());

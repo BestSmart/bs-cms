@@ -4,8 +4,8 @@ App
 				function Imagem(obj) {
 					if (obj && (typeof obj !== undefined)) {
 						this.id = obj.id;
-						this.url = obj.url;
-						this.thumbnail = obj.thumbnail;
+						this.url = '../'+obj.url;
+						this.thumbnail = '../'+obj.thumbnail;
 						this.capa = obj.capa ? true : false;
 						this.album = obj.album;
 					}
