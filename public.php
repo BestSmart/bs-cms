@@ -21,12 +21,12 @@ use Controller\Printer;
 use Slim\Middleware\ContentTypes;
 use Slim\Slim;
 
-$loader = new Twig_Loader_Filesystem('templates');
+$templateName = 'unify-v2';
+$loader = new Twig_Loader_Filesystem($templateName.'/templates');
 $twig = new Twig_Environment($loader, array(
 	'cache' => 'compilation_cache',
 		));
 
-$templateName = 'unify';
 
 $app = new Slim(array(
 	'view' => new \Slim\Views\Twig(),
@@ -142,6 +142,7 @@ $view->addGlobal('time', time());
 $view->addGlobal('slides', $slides);
 $view->addGlobal('parceiros', $parceiros);
 $view->addGlobal('albuns', $albuns);
+$view->addGlobal('templateName', $templateName);
 
 function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
 	#versao do encoding xml

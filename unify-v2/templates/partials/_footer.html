@@ -1,0 +1,85 @@
+<!--=== Footer v4 ===-->
+<div class="footer-v4">
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- About -->
+				<div class="col-md-4 md-margin-bottom-40">
+					<a href="{{base_url}}/"><img class="footer-logo" src="{{empresa.urlLogo}}" alt=""></a>
+					<p>{{empresa.slogan}}</p>
+					<br>
+
+					<ul class="list-unstyled address-list margin-bottom-20">
+						<li><i class="fa fa-angle-right"></i>{{empresa.endereco}}</li>
+						<li><i class="fa fa-angle-right"></i>Telefone: {{empresa.telefone}}</li>
+						<li><i class="fa fa-angle-right"></i>Email: <a href="mailto:{{empresa.emailContato}}">{{empresa.emailContato}}</a></li>
+					</ul>
+
+				</div>
+				<!-- End About -->                    
+				{%if posts%}
+				<div class="col-md-2 col-sm-3">
+					<div class="row">
+						<div class="col-sm-12 col-xs-6">
+							<h2 class="thumb-headline">Posts</h2>
+							<ul class="list-unstyled simple-list margin-bottom-20">
+								{%if posts.length > 5%}
+								{% for i in 0..5 %}
+								<li>
+									<a href="{{base_url}}/post/{{ posts[i].titulo}}">{{ posts[i].nomeMenu}}</a>
+									<small>{{posts[i].date |date("d/m/Y G:i:s")}}</small>
+								</li>
+								{% endfor %}
+								{%else%}
+								{% for post in posts %}
+								<li>
+									<a href="{{base_url}}/post/{{ post.titulo}}">{{ post.nomeMenu}}</a>
+									<small>{{post.date |date("d/m/Y G:i:s")}}</small>
+								</li>
+								{% endfor %}
+								{%endif%}
+							</ul>
+						</div>    
+					</div>        
+				</div>
+				{%endif%}
+
+				{%if menus%}
+				<div class="col-md-2 col-sm-3">
+					<div class="row">
+						<div class="col-sm-12 col-xs-6">
+							<h2 class="thumb-headline">Menus</h2>
+							<ul class="list-unstyled simple-list margin-bottom-20">
+								{% for menu in menus %}
+								<li><a href="{{base_url}}/{{ menu.url }}">{{ menu.texto }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>        
+				</div>
+				{%endif%}
+				<!-- End Simple List -->
+			</div><!--/end row-->
+		</div><!--/end continer-->
+	</div><!--/footer-->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">                     
+					<p>
+						2014 &copy;
+						<a target="_blank" href="http://bestsmart.com.br">BestSmart.</a>
+					</p>
+				</div>
+				<div class="col-md-6">  
+					<ul class="list-inline sponsors-icons pull-right">
+						<li><div class="fb-share-button" data-href="{{url}}" data-layout="button_count"></div></li>   
+						<li><div class="fb-like" data-href="{{empresa.dominio}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false" data-colorscheme="light"></div></li>   
+					</ul>
+				</div>
+			</div>
+		</div> 
+	</div><!--/copyright--> 
+</div>
+<!--=== End Footer v4 ===-->
