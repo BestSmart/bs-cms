@@ -25,8 +25,8 @@ class ImagemCtrl implements IController {
 	}
 
 	function removeImage($image) {
-		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH . $image->getThumbnail());
-		$destination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH . $image->getUrl());
+		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH) . "/" . $image->getThumbnail();
+		$destination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH) . "/" . $image->getUrl();
 		unlink($thumbnailDestination);
 		unlink($destination);
 	}
@@ -56,7 +56,7 @@ class ImagemCtrl implements IController {
 		$resizeObj->saveImage($destination, 90);
 
 		$resizeThumbnail = new Resizer($tempName, $ext);
-		$resizeThumbnail->resizeImage(215, 160, 'crop');
+		$resizeThumbnail->resizeImage(250, 160, 'crop');
 		$resizeThumbnail->saveImage($thumbnailDestination, 90);
 
 		$imagem = new Imagem();

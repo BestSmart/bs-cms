@@ -26,19 +26,14 @@ $twig = new Twig_Environment($loader, array(
 	'cache' => 'compilation_cache',
 		));
 
-$templateName = 'unify';
-
 $app = new Slim(array(
-	'view' => new \Slim\Views\Twig(),
-	'templates.path' => $templateName . '/templates'
+	'view' => new \Slim\Views\Twig()
 		));
 $app->add(new ContentTypes());
-
 $printer = new Printer();
 
-$menus = $entityManager
-		->createQueryBuilder()
-		->select('e.nomeMenu as texto, e.titulo as url')
+$qb = $entityManager->createQueryBuilder();
+$menus = $qb->select('e.nomeMenu as texto, e.titulo as url')
 		->from('Model\Pagina', 'e')
 		->where('e.publicar = ?1 and e.postagem = ?2')
 		->orderby('e.ordem')
@@ -47,24 +42,21 @@ $menus = $entityManager
 		->getQuery()
 		->getResult();
 
-$slides = $entityManager
-		->createQueryBuilder()
+$slides = $entityManager->createQueryBuilder()
 		->select('e')
 		->from('Model\Slide', 'e')
 		->orderby('e.ordem')
 		->getQuery()
 		->getResult();
 
-$parceiros = $entityManager
-		->createQueryBuilder()
-		->select('e.nome, e.slogan, e.url, i.thumbnail as capa')
+$parceiros = $entityManager->createQueryBuilder()
+		->select('e.nome, e.slogan, e.url, i.url as capa')
 		->from('Model\Parceiro', 'e')
 		->innerJoin('e.album', 'a', 'a.id = e.album_id')
 		->leftJoin('a.imagens', 'i', 'a.id = i.album_id')
 		->where('i.capa = true')
 		->getQuery()
 		->getResult();
-
 $albuns = $entityManager->createQueryBuilder()
 		->select('e')
 		->from('Model\Album', 'e')
@@ -73,9 +65,8 @@ $albuns = $entityManager->createQueryBuilder()
 		->getQuery()
 		->getResult();
 
-$posts = $entityManager
-		->createQueryBuilder()
-		->select('e.nomeMenu as nomeMenu, e.titulo, e.dataHora as date')
+$qb = $entityManager->createQueryBuilder();
+$posts = $qb->select('e.nomeMenu as nomeMenu, e.titulo, e.dataHora as date')
 		->from('Model\Pagina', 'e')
 		->where('e.publicar = ?1 and e.postagem = ?2')
 		->orderby('e.dataHora', 'DESC')
@@ -84,23 +75,12 @@ $posts = $entityManager
 		->getQuery()
 		->getResult();
 
-$produtos = $entityManager
-		->createQueryBuilder()
-		->select('p')
+$qbProdutos = $entityManager->createQueryBuilder();
+$produtos = $qbProdutos->select('p')
 		->from('Model\Produto', 'p')
-		->orderby('p.destaque', 'DESC')
 		->getQuery()
 		->getResult();
 
-$produtosDestaque = $entityManager
-		->createQueryBuilder()
-		->select('e.nome, e.conteudo as conteudo, i.url as album, e.tags, e.resumo')
-		->from('Model\Produto', 'e')
-		->innerJoin('e.album', 'a', 'a.id = e.album_id')
-		->leftJoin('a.imagens', 'i', 'a.id = i.album_id')
-		->where('(i.capa = true or i.id is null) and e.destaque = true')
-		->getQuery()
-		->getResult();
 $empresa = $entityManager
 		->createQueryBuilder()
 		->select('e')
@@ -135,7 +115,6 @@ $view->addGlobal('empresa', $empresa);
 $view->addGlobal('menus', $menus);
 $view->addGlobal('posts', $posts);
 $view->addGlobal('produtos', $produtos);
-$view->addGlobal('produtosDestaque', $produtosDestaque);
 $view->addGlobal('sessoes', $sessoes);
 $view->addGlobal('title', 'BestSmart');
 $view->addGlobal('time', time());
@@ -143,7 +122,7 @@ $view->addGlobal('slides', $slides);
 $view->addGlobal('parceiros', $parceiros);
 $view->addGlobal('albuns', $albuns);
 
-function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
+function gerarSiteMap($menus, $posts, $qtdPaginas) {
 	#versao do encoding xml
 	$dom = new DOMDocument("1.0", "UTF-8");
 
@@ -166,14 +145,11 @@ function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
 		$menus[] = ['url' => 'posts/' . $i];
 	}
 	foreach ($posts as $post) {
-		$menus[] = ['url' => $post['titulo']];
-	}
-	foreach ($produtos as $produto) {
-		$menus[] = ['url' => 'produto/' . $produto->getNome()];
+		$menus[] = ['url' => urlencode(utf8_decode($post['titulo']))];
 	}
 	foreach ($menus as $menu) {
 		$url = $dom->createElement("url");
-		$loc = $dom->createElement("loc", $path . "/" . str_replace('%2F', '/', rawurlencode(utf8_decode($menu['url']))));
+		$loc = $dom->createElement("loc", $path . "/" . str_replace('%2F', '/', urlencode(utf8_decode($menu['url']))));
 		$frequency = $dom->createElement("changefreq", "weekly");
 		$url->appendChild($loc);
 		$url->appendChild($frequency);
@@ -193,7 +169,7 @@ function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
 $app->get('/', function() use ($app) {
 	$app->render('index.html');
 });
-$app->get('/sitemap.xml', function() use ($app, $printer, $entityManager, $menus, $posts, $produtos) {
+$app->get('/sitemap.xml', function() use ($app, $printer, $entityManager, $menus, $posts) {
 	$qbCount = $entityManager->createQueryBuilder();
 	$posts_count = $qbCount->select('count(e.id)')
 			->from('Model\Pagina ', 'e')
@@ -202,7 +178,7 @@ $app->get('/sitemap.xml', function() use ($app, $printer, $entityManager, $menus
 			->setParameter(2, true)
 			->getQuery()
 			->getSingleScalarResult();
-	gerarSiteMap($menus, $posts, $produtos, intval(($posts_count / 10) + 1));
+	gerarSiteMap($menus, $posts, intval(($posts_count / 10) + 1));
 });
 
 $app->get('/cms/', function() use ($app) {
@@ -334,22 +310,19 @@ $app->get('/produto/:nome', function ($nome) use ($app, $entityManager) {
 			->where('e.nome = ?1')
 			->setParameter(1, $nome)
 			->getQuery()
-			->getOneOrNullResult();
+			->getSingleResult();
 
 
 	$qbImg = $entityManager->createQueryBuilder();
-	if ($produto != NULL) {
-		$imagens = $qbImg->select('e.url')
-				->from('Model\Imagem', 'e')
-				->where('e.album = ?1')
-				->setParameter(1, $produto->getAlbum())
-				->orderby('e.capa', 'DESC')
-				->getQuery()
-				->getResult();
-		$tags = $produto->getTags();
-	}
+	$imagens = $qbImg->select('e.url')
+			->from('Model\Imagem', 'e')
+			->where('e.album = ?1')
+			->setParameter(1, $produto->getAlbum())
+			->orderby('e.capa', 'DESC')
+			->getQuery()
+			->getResult();
 //	$produto[0]["images"] = $imagens;
-	$app->view()->setData(['produto' => $produto, 'imagens' => $imagens, 'url' => full_path(), 'tags' => $tags, 'title' => $nome]);
+	$app->view()->setData(['produto' => $produto, 'imagens' => $imagens, 'url' => full_path(), 'tags' => $produto->getTags(), 'title' => $nome]);
 	$app->render('produto.html');
 });
 
