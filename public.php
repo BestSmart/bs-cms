@@ -149,7 +149,11 @@ $view->addGlobal('templateStyle', $templateStyle);
 $view->addGlobal(
 		'templateBoxed', $templateBoxed);
 
-function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
+function getFullUrl($path, $url) {
+	return $path . "/" . str_replace('%2F', '/', rawurlencode(utf8_decode($url)));
+}
+
+function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas, $print = true) {
 	#versao do encoding xml
 	$dom = new DOMDocument("1.0", "UTF-8");
 
@@ -172,14 +176,14 @@ function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
 		$menus[] = ['url' => 'posts/' . $i];
 	}
 	foreach ($posts as $post) {
-		$menus[] = ['url' => $post['titulo']];
+		$menus[] = ['url' => 'post/' . $post['titulo']];
 	}
 	foreach ($produtos as $produto) {
 		$menus[] = ['url' => 'produto/' . $produto->getNome()];
 	}
 	foreach ($menus as $menu) {
 		$url = $dom->createElement("url");
-		$loc = $dom->createElement("loc", $path . "/" . str_replace('%2F', '/', rawurlencode(utf8_decode($menu['url']))));
+		$loc = $dom->createElement("loc", getFullUrl($path, $menu['url']));
 		$frequency = $dom->createElement("changefreq", "weekly");
 		$url->appendChild($loc);
 		$url->appendChild($frequency);
@@ -193,7 +197,10 @@ function gerarSiteMap($menus, $posts, $produtos, $qtdPaginas) {
 #cabeçalho da página
 	header("Content-Type: text/xml");
 # imprime o xml na tela
-	print $dom->saveXML();
+	if ($print) {
+		print $dom->saveXML();
+	}
+	return $menus;
 }
 
 $app->get('/', function() use($app) {
