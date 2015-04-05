@@ -148,6 +148,12 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
 					templateUrl: App.basepath('acesso/alterarSenha.html'),
 					controller: 'AlterarSenhaCtrl'
 				})
+				.state('principal.ajuda', {
+					url: '/ajuda',
+					title: 'Ajuda',
+					templateUrl: App.basepath('ajuda/ajuda.html'),
+					controller: 'NullController'
+				})
 				;
 
 

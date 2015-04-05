@@ -93,16 +93,14 @@
 			</ul>
 		</div><!--/col-md-3-->
 	</div><!--/row-->
+	<!-- Google Map -->
+	{%if empresa.iframeGoogleMaps%}
+	<div class="embed-responsive embed-responsive-16by9 height-250">
+		{{empresa.iframeGoogleMaps | raw}}
+	</div>
+	{%endif%}
 </div>
-<!-- Google Map -->
-<!--				<div>
-					<iframe
-						width="600"
-						height="450"
-						frameborder="0" style="border:0"
-						src="{{empresa.urlGoogleMaps}}">
-					</iframe>
-				</div>-/map-->
+
 </div>  
 {% endblock %}
 {%block scripts%}

@@ -18,7 +18,7 @@ App
 						this.telefone = obj.telefone;
 						this.endereco = obj.endereco;
 						this.emailContato = obj.emailContato;
-						this.urlGoogleMaps = obj.urlGoogleMaps;
+						this.iframeGoogleMaps = obj.iframeGoogleMaps;
 						this.nomeTema = obj.nomeTema;
 						this.nomeCorTema = obj.nomeCorTema;
 						this.temaDark = obj.temaDark;

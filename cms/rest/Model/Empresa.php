@@ -51,8 +51,8 @@ class Empresa extends DefaultModel {
 	/** @Column(type="string") * */
 	protected $urlLogo;
 
-	/** @Column(type="string", nullable=true) * */
-	protected $urlGoogleMaps;
+	/** @Column(type="text", nullable=true) * */
+	protected $iframeGoogleMaps;
 
 	/** @Column(type="string") * */
 	protected $endereco;
@@ -197,12 +197,12 @@ class Empresa extends DefaultModel {
 		return $this;
 	}
 
-	public function getUrlGoogleMaps() {
-		return $this->urlGoogleMaps;
+	public function getIframeGoogleMaps() {
+		return $this->iframeGoogleMaps;
 	}
 
-	public function setUrlGoogleMaps($urlGoogleMaps) {
-		$this->urlGoogleMaps = $urlGoogleMaps;
+	public function setIframeGoogleMaps($iframeGoogleMaps) {
+		$this->iframeGoogleMaps = $iframeGoogleMaps;
 		return $this;
 	}
 

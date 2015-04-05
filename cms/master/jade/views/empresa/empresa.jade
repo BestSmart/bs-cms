@@ -25,19 +25,19 @@
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-dominio") Domínio: *
-									input.form-control#empresa-dominio(type='text', name='telefone', ng-model='empresa.dominio', placeholder="Digite o dominio",required)
+									input.form-control#empresa-dominio(type='url', ng-model='empresa.dominio', placeholder="Digite o dominio")
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-url-logo") Url Logo: *
-									input.form-control#empresa-url-logo(type='text', name='telefone', ng-model='empresa.urlLogo', placeholder="Digite a url da logo",required)
+									input.form-control#empresa-url-logo(type='url', name='telefone', ng-model='empresa.urlLogo', placeholder="Digite a url da logo",required)
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-idGoogleAnalytics") Id Google Analytics: *
-									input.form-control#empresa-idGoogleAnalytics(type='text', name='idGoogleAnalytics', ng-model='empresa.idGoogleAnalytics', placeholder="Digite o ID do Google Analytics",required)
+									input.form-control#empresa-idGoogleAnalytics(type='text', name='idGoogleAnalytics', ng-model='empresa.idGoogleAnalytics', placeholder="Digite o ID do Google Analytics")
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-telefone") Telefone: *
-									input.form-control#empresa-telefone(type='text', name='telefone', ng-model='empresa.telefone', placeholder="Digite o telefone",required)
+									input.form-control#empresa-telefone(type='text', masked="", data-inputmask="'mask': '(99) 9999-9999[9]'",  name='telefone', ng-model='empresa.telefone', placeholder="Digite o telefone",required)
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-endereco") Endereço: *
@@ -45,11 +45,11 @@
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-email") Email Contato *
-									input.form-control#empresa-email(ng-model="empresa.emailContato",type='text', placeholder="Digite o email de contato separado", required)
+									input.form-control#empresa-email(ng-model="empresa.emailContato",type='email', placeholder="Digite o email de contato separado", required)
 							.col-md-6
 								.form-group
-									label.control-label(for="empresa-maps") Url Google Maps *
-									input.form-control#empresa-maps(ng-model="empresa.urlGoogleMaps",type='text', placeholder="Digite a url do Google Maps")
+									label.control-label(for="empresa-maps") Iframe Google Maps *
+									textarea.form-control#empresa-maps(ng-model="empresa.iframeGoogleMaps", placeholder="Cole o código embed do Google Maps")
 							.col-md-6
 								.form-group
 									label.control-label(for="empresa-missao") Missão *
