@@ -122,11 +122,11 @@ body.dark .topbar-v1 .top-v1-data li i {
 }
 
 /*Navigation*/
-body.dark .header .navbar-default .navbar-nav > li > a,
+/*body.dark .header .navbar-default .navbar-nav > li > a,
 body.dark .header-v1 .navbar-default .navbar-nav > li > a,
 body.dark .header-v3 .navbar-default .navbar-nav > li > a {
 	color: #999;
-}
+}*/
 
 /*Search*/
 body.dark .header .navbar .nav > li > .search {

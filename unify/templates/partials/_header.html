@@ -36,8 +36,11 @@
 {%block more_css%}
 {%endblock%}
 <!-- CSS Theme -->
-<!--<link rel="stylesheet" href="{{base_url}}/{{templateName}}/assets/css/theme-colors/light-green.css">-->
-<link href="{{base_url}}/{{templateName}}/assets/css/theme-colors/dark-blue.css" rel="stylesheet" type="text/css"/>
+{%if templateStyle == 'dark'%}
+<link rel="stylesheet" href="{{base_url}}/{{templateName}}/assets/css/theme-skins/dark.css">
+{%endif%}
+<link href="{{base_url}}/{{templateName}}/assets/css/theme-colors/{{templateCollor}}.css" rel="stylesheet" type="text/css"/>
 <!-- CSS Customization -->
 <link rel="stylesheet" href="{{base_url}}/{{templateName}}/assets/css/custom.css">
+
 

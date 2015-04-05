@@ -58,7 +58,7 @@
 				<div class="text-right">
 					<ul class="pagination">
 						{% if pages == 1 %}
-						<li><a href="{{pages}}">{{loop.index}}</a></li>
+						<li><a href="{{pages}}">{{pages}}</a></li>
 						{% else %}
 						{% for i in 0..pages %}
 						<li><a href="{{pages}}">{{loop.index}}</a></li>
@@ -71,7 +71,6 @@
 		<!-- End Right Sidebar -->
 	</div>
 	<div class="row col-md-12">
-		<div class="fb-share-button" data-href="{{url}}" data-layout="button_count"></div>
 		<div class="fb-comments" data-href="{{url}}" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
 	</div>
 </div>

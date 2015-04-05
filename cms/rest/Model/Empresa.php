@@ -66,6 +66,18 @@ class Empresa extends DefaultModel {
 	/** @Column(type="string", nullable=true) * */
 	protected $idGoogleAnalytics;
 
+	/** @Column(type="string") * */
+	protected $nomeTema;
+
+	/** @Column(type="boolean") * */
+	protected $temaDark;
+
+	/** @Column(type="string") * */
+	protected $nomeCorTema;
+
+	/** @Column(type="boolean") * */
+	protected $temaFullWidth;
+
 	/**
 	 * @ManyToMany(targetEntity="Detalhe", cascade={"all"})
 	 * @JoinTable(name="empresas_detalhes",
@@ -229,6 +241,42 @@ class Empresa extends DefaultModel {
 
 	public function setUrlLogo($urlLogo) {
 		$this->urlLogo = $urlLogo;
+		return $this;
+	}
+
+	public function getNomeTema() {
+		return $this->nomeTema;
+	}
+
+	public function getTemaDark() {
+		return $this->temaDark;
+	}
+
+	public function getNomeCorTema() {
+		return $this->nomeCorTema;
+	}
+
+	public function getTemaFullWidth() {
+		return $this->temaFullWidth;
+	}
+
+	public function setNomeTema($nomeTema) {
+		$this->nomeTema = $nomeTema;
+		return $this;
+	}
+
+	public function setTemaDark($temaDark) {
+		$this->temaDark = $temaDark;
+		return $this;
+	}
+
+	public function setNomeCorTema($nomeCorTema) {
+		$this->nomeCorTema = $nomeCorTema;
+		return $this;
+	}
+
+	public function setTemaFullWidth($temaFullWidth) {
+		$this->temaFullWidth = $temaFullWidth;
 		return $this;
 	}
 

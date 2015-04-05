@@ -19,6 +19,10 @@ App
 						this.endereco = obj.endereco;
 						this.emailContato = obj.emailContato;
 						this.urlGoogleMaps = obj.urlGoogleMaps;
+						this.nomeTema = obj.nomeTema;
+						this.nomeCorTema = obj.nomeCorTema;
+						this.temaDark = obj.temaDark;
+						this.temaFullWidth = obj.temaFullWidth;
 						this.detalhes = [];
 						var self = this;
 						if (obj.detalhes) {

@@ -36,7 +36,11 @@ class EmpresaCtrl implements IController {
 					->setValores("Escreva os valores separados por vírgula")
 					->setNome("Escreva o nome da sua Empresa")
 					->setResumo("Faça um resumo da sua Empresa da forma que você gostaria que seus usuários vejam")
-					->setTelefone("Telefone da Empresa");
+					->setTelefone("Telefone da Empresa")
+					->setNomeTema('unify')
+					->setNomeCorTema('dark-blue')
+					->setTemaDark(false)
+					->setTemaFullWidth(true);
 			$this->criarEmpresa($empresa);
 		}
 	}
@@ -73,7 +77,11 @@ class EmpresaCtrl implements IController {
 					->setUrlLogo($empresa->getUrlLogo())
 					->setTelefone($empresa->getTelefone())
 					->setEndereco($empresa->getEndereco())
-					->setEmailContato($empresa->getEmailContato());
+					->setEmailContato($empresa->getEmailContato())
+					->setNomeTema($empresa->getNomeTema())
+					->setNomeCorTema($empresa->getNomeCorTema())
+					->setTemaDark($empresa->getTemaDark())
+					->setTemaFullWidth($empresa->getTemaFullWidth());
 			$detalhes = $tmp->getDetalhes();
 			foreach ($detalhes as $detalhe) {
 				$detalhes->removeElement($detalhe);
