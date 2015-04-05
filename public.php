@@ -16,11 +16,13 @@ require_once 'cms/rest/Model/Parceiro.php';
 
 require_once 'cms/rest/Controller/IController.php';
 require_once 'cms/rest/Controller/Printer.php';
+require_once 'cms/rest/Controller/EmpresaCtrl.php';
 
 use Controller\Printer;
 use Slim\Middleware\ContentTypes;
 use Slim\Slim;
 
+new Controller\EmpresaCtrl(null, $entityManager);
 $empresa = $entityManager
 		->createQueryBuilder()
 		->select('e')

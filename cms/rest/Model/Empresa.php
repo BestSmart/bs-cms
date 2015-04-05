@@ -48,7 +48,7 @@ class Empresa extends DefaultModel {
 	/** @Column(type="string") * */
 	protected $dominio;
 
-	/** @Column(type="string") * */
+	/** @Column(type="string", nullable=true) * */
 	protected $urlLogo;
 
 	/** @Column(type="text", nullable=true) * */
@@ -57,7 +57,7 @@ class Empresa extends DefaultModel {
 	/** @Column(type="string") * */
 	protected $endereco;
 
-	/** @Column(type="string") * */
+	/** @Column(type="string", nullable=true) * */
 	protected $telefone;
 
 	/** @Column(type="string") * */
@@ -72,7 +72,7 @@ class Empresa extends DefaultModel {
 	/** @Column(type="boolean") * */
 	protected $temaDark;
 
-	/** @Column(type="string") * */
+	/** @Column(type="string", nullable=true) * */
 	protected $nomeCorTema;
 
 	/** @Column(type="boolean") * */
