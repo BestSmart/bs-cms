@@ -23,6 +23,7 @@ App
 						this.nomeCorTema = obj.nomeCorTema;
 						this.temaDark = obj.temaDark;
 						this.temaFullWidth = obj.temaFullWidth;
+						this.facebookPageUrl = obj.facebookPageUrl;
 						this.detalhes = [];
 						var self = this;
 						if (obj.detalhes) {

@@ -82,7 +82,8 @@ class EmpresaCtrl implements IController {
 					->setNomeTema($empresa->getNomeTema())
 					->setNomeCorTema($empresa->getNomeCorTema())
 					->setTemaDark($empresa->getTemaDark())
-					->setTemaFullWidth($empresa->getTemaFullWidth());
+					->setTemaFullWidth($empresa->getTemaFullWidth())
+					->setFacebookPageUrl($empresa->getFacebookPageUrl());
 			$detalhes = $tmp->getDetalhes();
 			foreach ($detalhes as $detalhe) {
 				$detalhes->removeElement($detalhe);

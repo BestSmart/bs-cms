@@ -78,6 +78,9 @@ class Empresa extends DefaultModel {
 	/** @Column(type="boolean") * */
 	protected $temaFullWidth;
 
+	/** @Column(type="string", nullable=true) * */
+	protected $facebookPageUrl;
+
 	/**
 	 * @ManyToMany(targetEntity="Detalhe", cascade={"all"})
 	 * @JoinTable(name="empresas_detalhes",
@@ -212,7 +215,7 @@ class Empresa extends DefaultModel {
 	}
 
 	public function setTelefone($telefone) {
-		$this->telefone = str_replace ('_' ,'' , $telefone);
+		$this->telefone = str_replace('_', '', $telefone);
 		return $this;
 	}
 
@@ -277,6 +280,15 @@ class Empresa extends DefaultModel {
 
 	public function setTemaFullWidth($temaFullWidth) {
 		$this->temaFullWidth = $temaFullWidth;
+		return $this;
+	}
+
+	public function getFacebookPageUrl() {
+		return $this->facebookPageUrl;
+	}
+
+	public function setFacebookPageUrl($facebookPageUrl) {
+		$this->facebookPageUrl = $facebookPageUrl;
 		return $this;
 	}
 
