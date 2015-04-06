@@ -87,7 +87,7 @@
 			<div class="headline"><h2>Contatos</h2></div>
 			<ul class="list-unstyled who margin-bottom-30">
 				<li><a href="#"><i class="fa fa-home"></i>{{empresa.endereco}}</a></li>
-				<li><a href="#"><i class="fa fa-envelope"></i>{{empresa.emailContato}}</a></li>
+				<li><a href="mailto:{{empresa.emailContato}}"><i class="fa fa-envelope"></i>{{empresa.emailContato}}</a></li>
 				<li><a href="#"><i class="fa fa-phone"></i>{{empresa.telefone}}</a></li>
 				<li><a href="#"><i class="fa fa-globe"></i>{{empresa.dominio}}</a></li>
 			</ul>

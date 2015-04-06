@@ -36,8 +36,8 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 						contentType: false,
 						processData: false,
 						success: function (imagem) {
-							var img = JSON.parse(imagem);
-							editor.insertImage(welEditable, img.url.replace('../../', '../'));
+							var img = new Imagem(JSON.parse(imagem));
+							editor.insertImage(welEditable, img.url);
 						}
 					});
 				}

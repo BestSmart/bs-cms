@@ -212,7 +212,7 @@ class Empresa extends DefaultModel {
 	}
 
 	public function setTelefone($telefone) {
-		$this->telefone = $telefone;
+		$this->telefone = str_replace ('_' ,'' , $telefone);
 		return $this;
 	}
 

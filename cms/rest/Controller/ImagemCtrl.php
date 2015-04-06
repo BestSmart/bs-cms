@@ -52,7 +52,6 @@ class ImagemCtrl implements IController {
 		}
 		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::IMG_FOLDER_THUMBNAIL) . "/" . $albumId . "/" . $name;
 		$destination = realpath(self::BASE_IMG_PATH . self::IMG_FOLDER) . "/" . $albumId . "/" . $name;
-		var_dump($destination, $thumbnailDestination);
 		$resizeObj->saveImage($destination, 90);
 
 		$resizeThumbnail = new Resizer($tempName, $ext);
