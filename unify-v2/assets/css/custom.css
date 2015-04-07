@@ -21,3 +21,9 @@
 	max-width: 670px;
 	text-transform: none !important;
 }
+
+.slide-product{
+    margin: auto;
+    min-width: 200px;
+    display: inline-block;
+}

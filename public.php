@@ -269,7 +269,6 @@ $app->post('/email/', function() use ($app, $empresa) {
 					'<strong>Assunto: </strong>' . $req->post('assunto') . "<br>" .
 					'<strong>Mensagem: </strong>' . $req->post('mensagem') . "<br>";
 
-			var_dump($empresa);
 			mail($to, $subject, $message, $headers);
 			if ($req->post('copy') == 'on') {
 				mail($req->post('email'), $subject, $message, $headers);

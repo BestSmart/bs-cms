@@ -20,3 +20,9 @@
 	white-space: pre-line;
 	max-width: 670px;
 }
+
+.slide-product{
+    margin: auto;
+    min-width: 200px;
+    display: inline-block;
+}

@@ -120,16 +120,16 @@
 		<div class="col-md-4">
 			<div class="headline"><h2>Produtos em destaque</h2></div>
 			<div id="myCarousel" class="carousel slide carousel-v1">
-				{%for produto in produtosDestaque%}
 				<div class="carousel-inner">
+					{%for produto in produtosDestaque%}
 					<div class="item {%if loop.first%} active {%endif%}">
 						<img src="{{produto['album']}}" alt="">
 						<div class="carousel-caption">
 							<p>{{produto['nome']}}</p>
 						</div>
 					</div>
+					{%endfor%}
 				</div>
-				{%endfor%}
 				<div class="carousel-arrow">
 					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
 						<i class="fa fa-angle-left"></i>

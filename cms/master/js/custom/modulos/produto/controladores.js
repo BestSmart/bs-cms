@@ -12,17 +12,6 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 		$scope.cfg = {
 			height: 300, //set editable area's height
 			focus: true,
-			// toolbar
-			toolbar: [
-				['font', ['bold', 'italic', 'underline', 'clear']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']],
-				['table', ['table']],
-				['insert', ['link']],
-				['view', ['fullscreen']],
-				['help', ['help']]
-			],
 			onImageUpload: function (files, editor, welEditable) {
 
 				function sendFile(file, editor, welEditable) {

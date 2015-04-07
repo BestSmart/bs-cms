@@ -10,15 +10,22 @@
 </div>
 
 <!--=== Content ===-->
+{%if empresa.historia%}
 <div class="container content">
 	<h2>Nossa História</h2>
 	{{empresa.historia | raw}}
 </div>
+{%endif%}
 <!--=== Content ===-->
+{%if empresa.resumo%}
 <div class="container content">
 	<h2>Mais Sobre Nós</h2>
 	{{empresa.resumo | raw}}
 </div>
+{%endif%}
+{%if empresa.missao %}
+{%if empresa.visao %}
+{%if  empresa.valores%}
 <div class="container content">
 	<div class="row margin-bottom-10">                 
 		<div class="col-md-4 col-sm-6">                 
@@ -48,4 +55,7 @@
 		</div>
 	</div>
 </div>
+{%endif%}
+{%endif%}
+{%endif%}
 {% endblock %}

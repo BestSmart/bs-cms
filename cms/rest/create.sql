@@ -27,6 +27,5 @@ ALTER TABLE parceiros ADD CONSTRAINT FK_949C60CC1137ABCF FOREIGN KEY (album_id) 
 INSERT INTO `credenciais` (`login`, `senha`, `email`, `salt`) VALUES
 ('admin', 'ca89ca8e501c5b84e1cfe0afb097f87b67f852c4ec022a50ceffb79f9a30fd3c66326e7f8e416ebcbe8f33b3b20780e0afb1713a2ae22fc7b8bc5d714c113a56', 'fabricio.santos@bestsmart.com.br', '98a5a84e7cc7472c58f81924b855609cf9b339e1ec889515eee7b815580062b8551e30f3696a25b4a667ee8f403aea6c15c7228c108f32222ea79c738774f80e');
 
-
---alter table Empresa
+-- alter table Empresa
 ALTER TABLE empresas ADD facebookPageUrl VARCHAR(255) DEFAULT NULL;

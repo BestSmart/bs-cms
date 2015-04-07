@@ -14,9 +14,6 @@ App.run(['$rootScope', 'SessionService', '$state', '$http', 'Config', function (
 			});
 			return equals;
 		};
-		$http.get('server/config.json').success(function (data) {
-			config.params = data;
-		});
 		$http.get('rest/index.php/credencial').success(function (data) {
 			SessionService.setUser(data);
 			$http.get('server/sidebar-menu.json').error(function () {

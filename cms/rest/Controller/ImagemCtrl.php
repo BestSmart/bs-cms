@@ -71,6 +71,8 @@ class ImagemCtrl implements IController {
 
 		$this->entityManager->persist($imagem);
 		$this->entityManager->flush();
+		$imagem->setUrl('../'.$imagem->getUrl());
+		$imagem->setThumbnail('../'.$imagem->getThumbnail());
 		$this->printer->printJsonResponse($imagem);
 	}
 
