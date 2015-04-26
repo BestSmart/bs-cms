@@ -14,21 +14,21 @@ App
 						this.album = obj.album;
 						this.tags = obj.tags;
 						this.resumo = obj.resumo;
-						this.url = 'http://bestsmart.com.br/post/' + this.titulo;
+						this.url = 'post/' + this.titulo;
 					}
 				}
 
 				Pagina.load = function () {
 					return Server.query();
-				}
+				};
 
 				Pagina.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Pagina.prototype.remover = function () {
 					var self = this;
-					return Server.remove({'id': this.id});
-				}
+					return Server.remove({'id': self.id});
+				};
 				return Pagina;
 			}]);

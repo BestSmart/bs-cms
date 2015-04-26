@@ -12,12 +12,12 @@ require_once "Configs.php";
 $user = constant('dbUsername');
 $pass = constant('dbPassword');
 
-$dbh = new PDO('mysql:host='.constant('dbHostName').';dbname='.constant('dbName'), $user, $pass, array(
+$dbh = new PDO('mysql:host=' . constant('dbHostName') . ';dbname=' . constant('dbName'), $user, $pass, array(
 	PDO::ATTR_PERSISTENT => true
 		));
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
-$isDevMode = false;
+$isDevMode = true;
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/Model"), $isDevMode);
 // or if you prefer yaml or XML
 //$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
@@ -28,7 +28,6 @@ $conn = array(
 	'user' => $user,
 	'password' => $pass,
 	'host' => constant('dbHostName'),
-	'driver' => 'pdo_mysql',
 	'pdo' => $dbh,
 );
 

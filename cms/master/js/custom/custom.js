@@ -1,9 +1,30 @@
 
 var config;
 
-App.run(['$rootScope', 'SessionService', '$state', '$http', 'Config', function ($rootScope, SessionService, $state, $http, Config) {
+App.run(['$rootScope', 'SessionService', '$state', '$http', 'Config', 'Imagem', '$location', function ($rootScope, SessionService, $state, $http, Config, Imagem, $location) {
 		Config.setConfig(config);
 
+		$rootScope.getFullImageUrl = function (url) {
+			var fullUrl = $location.absUrl().replace("cms/#" + $location.path(), "");
+			return fullUrl + url.replace('../', '');
+		};
+		$rootScope.uploadFileToEditor = function (file, editor, welEditable) {
+			var albumDefaultId = 1;
+			var data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data: data,
+				type: "POST",
+				url: "rest/index.php/imagem/" + albumDefaultId,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (imagem) {
+					var img = new Imagem(JSON.parse(imagem));
+					editor.insertImage(welEditable, img.url);
+				}
+			});
+		};
 		$rootScope.checkOperacao = function (operacao) {
 			var equals = false;
 			var authorities = SessionService.getUser().authorities;
@@ -99,15 +120,15 @@ App.run(['$rootScope', 'SessionService', '$state', '$http', 'Config', function (
 					priority: -1000,
 					scope: {
 						images: '=',
-						excluirImagem :'&',
-						setCapa :'&'
+						excluirImagem: '&',
+						setCapa: '&'
 					},
 					templateUrl: 'app/views/gallery.html',
 					link: function (scope, elem, attr) {
-						scope.excluir = function(img){
+						scope.excluir = function (img) {
 							scope.excluirImagem()(img);
 						};
-						scope.capa = function(img){
+						scope.capa = function (img) {
 							scope.setCapa()(img);
 						};
 						var gallery;

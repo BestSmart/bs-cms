@@ -13,16 +13,16 @@ App
 
 				Parceiro.load = function () {
 					return Server.query();
-				}
+				};
 
 				Parceiro.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Parceiro.prototype.remover = function () {
 					var self = this;
-					return Server.remove(this);
-				}
+					return Server.remove({'id': self.id});
+				};
 
 				return Parceiro;
 			}]);

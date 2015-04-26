@@ -22,16 +22,15 @@ App
 
 				Produto.load = function () {
 					return Server.query();
-				}
+				};
 
 				Produto.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Produto.prototype.remover = function () {
 					var self = this;
-					return Server.remove(this);
-				}
-
+					return Server.remove({'id': self.id});
+				};
 				return Produto;
 			}]);

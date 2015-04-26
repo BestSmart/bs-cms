@@ -16,12 +16,12 @@ App
 
 				Carrousel.load = function () {
 					return Server.get();
-				}
+				};
 
 				Carrousel.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 
 				return Carrousel;
 			}]);

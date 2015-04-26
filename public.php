@@ -69,10 +69,40 @@ $slides = $entityManager
 				->orderby('e.ordem')
 				->getQuery()->getResult();
 
+if (!$slides) {
+	$slides = [];
+	$carrousel = new Model\Carrousel();
+	$entityManager->persist($carrousel);
+	$entityManager->flush();
+	$imagens = $entityManager->createQueryBuilder()
+			->select('e.url')
+			->from('Model\Imagem', 'e')
+			->where('e.album = ?1')
+			->setParameter(1, 2)
+			->getQuery()
+			->getResult();
+	$linkImagem = $imagens[array_rand($imagens)]['url'];
+
+	$slide = (new Model\Slide())
+			->setCarrousel($carrousel)
+			->setLinkImagem($imagem)
+			->setOrdem(0)
+			->setRedirect('quemsomos')
+			->setTexto($empresa->getSlogan())
+			->setLinkImagem($linkImagem)
+			->setTitulo($empresa->getNome());
+	$entityManager->persist($slide);
+	$entityManager->flush();
+	$slides[] = $slide;
+}
+
+
+
 $parceiros = $entityManager
 		->createQueryBuilder()
 		->select('e.nome, e.slogan, e.url, i.thumbnail as capa')
-		->from('Model\Parceiro', 'e')->innerJoin('e.album', 'a', 'a.id = e.album_id')
+		->from('Model\Parceiro', 'e')
+		->innerJoin('e.album', 'a', 'a.id = e.album_id')
 		->leftJoin('a.imagens', 'i', 'a.id = i.album_id')
 		->where('i.capa = true')
 		->getQuery()

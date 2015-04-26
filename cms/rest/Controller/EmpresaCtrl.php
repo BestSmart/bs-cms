@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Exception;
 use Model\Album;
 use Model\Detalhe;
 use Model\Empresa;
@@ -84,17 +83,11 @@ class EmpresaCtrl implements IController {
 					->setTemaDark($empresa->getTemaDark())
 					->setTemaFullWidth($empresa->getTemaFullWidth())
 					->setFacebookPageUrl($empresa->getFacebookPageUrl());
-			$detalhes = $tmp->getDetalhes();
-			foreach ($detalhes as $detalhe) {
-				$detalhes->removeElement($detalhe);
-				$this->entityManager->remove($detalhe);
-				$this->entityManager->flush();
-			}
-
+			$album = $tmp->getAlbum();
+			$album->setNome('Empresa - ' . $tmp->getNome());
+			$this->entityManager->persist($album);
 			$this->entityManager->flush();
-			foreach ($body['detalhes'] as $detalhe) {
-				$tmp->addDetalhe((new Detalhe())->fromArray($detalhe));
-			};
+
 			$this->entityManager->persist($tmp);
 			$this->entityManager->flush();
 			$this->printer->printJsonResponse($tmp);

@@ -13,20 +13,20 @@ App
 
 				Credencial.load = function () {
 					return Server.query({id: "all"});
-				}
+				};
 
 				Credencial.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Credencial.prototype.remover = function () {
 					var self = this;
 					return Server.remove(self);
-				}
+				};
 				Credencial.prototype.novaSenha = function () {
 					var self = this;
 					return  $resource('rest/index.php/credencial/novaSenha').save(self);
-				}
+				};
 				Credencial.alterarSenha = function (senhaAtual, novaSenha, confirmarNovaSenha) {
 					var self = {
 						senhaAtual : senhaAtual,
@@ -34,7 +34,7 @@ App
 						confirmarSenha : confirmarNovaSenha
 					};
 					return  $resource('rest/index.php/credencial/alterarSenha').save(self);
-				}
+				};
 
 				return Credencial;
 			}]);

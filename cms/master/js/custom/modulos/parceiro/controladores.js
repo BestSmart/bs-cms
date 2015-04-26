@@ -24,15 +24,7 @@ App.controller('ParceiroCtrl', ['$scope', 'editableOptions', 'editableThemes', '
 				['help', ['help']]
 			]
 		};
-		$scope.addDetalhe = function () {
-			$scope.parceiro.detalhes.push(new Detalhe());
-		}
-		$scope.removerDetalhe = function (detalhe) {
-			var index = $scope.parceiro.detalhes.indexOf(detalhe);
-			if (index >= 0) {
-				$scope.parceiro.detalhes.splice(index, 1);
-			}
-		}
+
 		$scope.afterUpload = function () {
 			$scope.setParceiro($scope.parceiro);
 		}
@@ -55,7 +47,7 @@ App.controller('ParceiroCtrl', ['$scope', 'editableOptions', 'editableThemes', '
 		$scope.setCapa = function (img) {
 			img.setCapa();
 			$scope.setParceiro($scope.parceiro);
-		}
+		};
 		$scope.tableParams = new ngTableParams({
 			page: 1, // show first page
 			count: 10, // count per page
@@ -89,7 +81,7 @@ App.controller('ParceiroCtrl', ['$scope', 'editableOptions', 'editableThemes', '
 					$scope.$root.$broadcast("addAlert", "Parceiro salvo com sucesso", "success");
 				});
 			}
-		}
+		};
 
 		$scope.temParceiro = function () {
 			return $scope.parceiro !== undefined;

@@ -3,24 +3,7 @@ App.controller('PaginaCtrl', ['$scope', 'Pagina', 'ngTableParams', '$filter', 'F
 			height: 300, //set editable area's height
 			focus: true, //set focus editable area after Initialize summernote
 			onImageUpload: function (files, editor, welEditable) {
-
-				function sendFile(file, editor, welEditable) {
-					data = new FormData();
-					data.append("file", file);
-					$.ajax({
-						data: data,
-						type: "POST",
-						url: "rest/index.php/imagem/"+$scope.pagina.album.id,
-						cache: false,
-						contentType: false,
-						processData: false,
-						success: function (imagem) {
-							var img = new Imagem(JSON.parse(imagem));
-							editor.insertImage(welEditable, img.url);
-						}
-					});
-				}
-				sendFile(files[0], editor, welEditable);
+				$scope.$root.uploadFileToEditor(files[0], editor, welEditable);
 			}
 		};
 

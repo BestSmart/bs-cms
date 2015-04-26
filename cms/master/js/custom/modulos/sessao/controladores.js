@@ -10,7 +10,7 @@ App.controller('SessaoCtrl', ['$scope', 'Sessao', 'ngTableParams', '$filter', fu
 				['textsize', ['fontsize']],
 				['fontclr', ['color']],
 				['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-				['view', ['fullscreen','codeview']],
+				['view', ['fullscreen', 'codeview']],
 				['help', ['help']]
 			]
 		};

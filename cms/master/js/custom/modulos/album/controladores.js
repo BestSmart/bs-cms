@@ -1,5 +1,5 @@
 App.controller('AlbumCtrl', ['$scope', 'Album', 'ngTableParams', '$filter', '$modal', '$http', 'Imagem', function ($scope, Album, ngTableParams, $filter, $modal, $http, Imagem) {
-		$scope.afterUpload = function(){
+		$scope.afterUpload = function () {
 			$scope.setAlbum($scope.album);
 		}
 		$scope.setAlbum = function (album) {
@@ -30,10 +30,10 @@ App.controller('AlbumCtrl', ['$scope', 'Album', 'ngTableParams', '$filter', '$mo
 			}
 		}, {
 			getData: function ($defer, params) {
-				var loadData = function (albuns) {
+				var loadData = function (data) {
 					// use build-in angular filter
 					var filteredData = params.filter() ?
-							$filter('filter')(albuns, params.filter()) :
+							$filter('filter')(data, params.filter()) :
 							data;
 					var orderedData = params.sorting() ?
 							$filter('orderBy')(filteredData, params.orderBy()) :

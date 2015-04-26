@@ -28,6 +28,10 @@
 				span.btn-label
 					i.fa.fa-trash
 				| Remover
+			a.btn.btn-labeled.btn-success(href="",ng-dialog-scope='this', ng-dialog-data='{{jsonData}}', ng-dialog="modalImagensId", ng-dialog-controller='NullController', ng-dialog-class='ngdialog-mytheme', ng-dialog-show-close='true',ng-disabled="!temPagina() || pagina.id === undefined")
+				span.btn-label
+					i.fa.fa-file-image-o
+				| Imagens
 			div(ng-if="")
 				.fb-share-button(data-href="{{pagina.url}}", data-layout="button_count")
 	#formPaginas.panel.panel-info(ng-if="temPagina()")
@@ -82,20 +86,22 @@
 
 						.col-md-12
 							summernote(lang="pt-BR", ng-model="pagina.conteudo", config="cfg")
-	#formVerImagens.panel.panel-info(ng-if="temPagina() && pagina.id > 0")
-		.panel-heading
-			span.h4 Imagens da Página
-			paneltool(tool-collapse)
-		.panel-wrapper(collapse="formVerImagens", ng-init="formVerImagens=true")
-			.panel-body
-				gallery(images="images", excluir-imagem='excluirImagem', set-capa="setCapa")
-	#formPaginaImagens.panel.panel-info(ng-if="temPagina() && pagina.id > 0")
-		.panel-heading
-			span.h4 Upload de Imagens
-			paneltool(tool-collapse)
-		.panel-wrapper(collapse="formPaginaImagens", ng-init="formPaginaImagens=true")
-			.panel-body
-				form#formularioPaginaImagens(action="#",validate-form='', novalidate='')
-					fieldset
-						h3 Upload de Imagens
-						bs-image-upload(album="pagina.album.id", on-upload="onUpload()")
+script(type="text/ng-template", id="modalImagensId")
+	.ngdialog-content.bsdialog
+		#formVerImagens.panel.panel-info(ng-if="temPagina() && pagina.id > 0")
+			.panel-heading
+				span.h4 Imagens da Página
+				paneltool(tool-collapse)
+			.panel-wrapper(collapse="formVerImagens", ng-init="formVerImagens=true")
+				.panel-body
+					gallery(images="images", excluir-imagem='excluirImagem', set-capa="setCapa")
+		#formPaginaImagens.panel.panel-info(ng-if="temPagina() && pagina.id > 0")
+			.panel-heading
+				span.h4 Upload de Imagens
+				paneltool(tool-collapse)
+			.panel-wrapper(collapse="formPaginaImagens", ng-init="formPaginaImagens=true")
+				.panel-body
+					form#formularioPaginaImagens(action="#",validate-form='', novalidate='')
+						fieldset
+							h3 Upload de Imagens
+							bs-image-upload(album="pagina.album.id", on-upload="onUpload()")

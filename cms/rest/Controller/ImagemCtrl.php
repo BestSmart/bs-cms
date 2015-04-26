@@ -25,8 +25,8 @@ class ImagemCtrl implements IController {
 	}
 
 	function removeImage($image) {
-		$thumbnailDestination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH) . "/" . $image->getThumbnail();
-		$destination = realpath(self::BASE_IMG_PATH . self::BASE_IMG_PATH) . "/" . $image->getUrl();
+		$thumbnailDestination = realpath(self::BASE_IMG_PATH) . "/" . $image->getThumbnail();
+		$destination = realpath(self::BASE_IMG_PATH) . "/" . $image->getUrl();
 		unlink($thumbnailDestination);
 		unlink($destination);
 	}
@@ -116,7 +116,6 @@ class ImagemCtrl implements IController {
 			$imagens = $qb->select('e')
 					->from('Model\Imagem', 'e')
 					->where('e.album = ?1')
-					->orderby('e.capa', 'DESC')
 					->setParameter(1, $albumId)
 					->getQuery()
 					->getResult();

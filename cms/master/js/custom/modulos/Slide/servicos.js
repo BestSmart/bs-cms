@@ -14,16 +14,16 @@ App
 
 				Slide.load = function () {
 					return Server.query();
-				}
+				};
 
 				Slide.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Slide.prototype.remover = function () {
 					var self = this;
 					return Server.remove({'id': this.id});
-				}
+				};
 
 				return Slide;
 			}]);

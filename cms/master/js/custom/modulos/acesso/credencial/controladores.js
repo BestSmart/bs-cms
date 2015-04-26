@@ -12,10 +12,10 @@ App.controller('CredencialCtrl', ['$scope', 'Credencial', 'ngTableParams', '$fil
 			}
 		}, {
 			getData: function ($defer, params) {
-				var loadData = function (credenciais) {
+				var loadData = function (data) {
 					// use build-in angular filter
 					var filteredData = params.filter() ?
-							$filter('filter')(credenciais, params.filter()) :
+							$filter('filter')(data, params.filter()) :
 							data;
 					var orderedData = params.sorting() ?
 							$filter('orderBy')(filteredData, params.orderBy()) :

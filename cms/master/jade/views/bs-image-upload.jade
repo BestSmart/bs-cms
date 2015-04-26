@@ -40,13 +40,10 @@ div
 											td(nowrap='')
 												button.btn.btn-info.btn-xs(type='button', ng-click='item.upload()', ng-disabled='item.isReady || item.isUploading || item.isSuccess')
 													span.icon-cloud-upload.mr
-													| Upload
 												button.btn.btn-warning.btn-xs(type='button', ng-click='item.cancel()', ng-disabled='!item.isUploading')
 													span.icon-close.mr
-													| Cancelar
 												button.btn.btn-danger.btn-xs(type='button', ng-click='item.remove()')
 													span.icon-trash.mr
-													| Remover
 					.panel
 						.panel-body
 							div

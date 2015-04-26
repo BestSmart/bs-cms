@@ -76,10 +76,10 @@ App.controller('CarrouselCtrl', ['$scope', 'editableOptions', 'editableThemes', 
 					// use build-in angular filter
 					var filteredData = params.filter() ?
 							$filter('filter')(slides, params.filter()) :
-							data;
+							slides;
 					var orderedData = params.sorting() ?
 							$filter('orderBy')(filteredData, params.orderBy()) :
-							data;
+							slides;
 
 					params.total(orderedData.length); // set total for recalc produtotion
 					$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));

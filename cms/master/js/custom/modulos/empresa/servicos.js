@@ -1,6 +1,6 @@
 App
-		.factory('Empresa', ['$resource', 'Detalhe', function ($resource, Detalhe) {
-				var Server = $resource('rest/index.php/empresa/')
+		.factory('Empresa', ['$resource', 'Album', function ($resource, Album) {
+				var Server = $resource('rest/index.php/empresa/');
 				function Empresa(obj) {
 					if (obj && (typeof obj !== undefined)) {
 						this.id = obj.id;
@@ -24,24 +24,18 @@ App
 						this.temaDark = obj.temaDark;
 						this.temaFullWidth = obj.temaFullWidth;
 						this.facebookPageUrl = obj.facebookPageUrl;
-						this.detalhes = [];
-						var self = this;
-						if (obj.detalhes) {
-							obj.detalhes.forEach(function (detalhe) {
-								self.detalhes.push(new Detalhe(detalhe));
-							});
-						}
+						this.album = new Album(obj.album);
 					}
 				}
 
 				Empresa.load = function () {
 					return Server.get();
-				}
+				};
 
 				Empresa.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 
 				return Empresa;
 			}]);

@@ -13,31 +13,16 @@ App.controller('EmpresaCtrl', ['$scope', 'editableOptions', 'editableThemes', 'E
 			height: 150, //set editable area's height
 			focus: true, //set focus editable area after Initialize summernote
 			onImageUpload: function (files, editor, welEditable) {
-
-				function sendFile(file, editor, welEditable) {
-					data = new FormData();
-					data.append("file", file);
-					$.ajax({
-						data: data,
-						type: "POST",
-						url: "rest/index.php/imagem/" + $scope.empresa.album.id,
-						cache: false,
-						contentType: false,
-						processData: false,
-						success: function (imagem) {
-							var img = new Imagem(JSON.parse(imagem));
-							editor.insertImage(welEditable, img.url);
-						}
-					});
-				}
-				sendFile(files[0], editor, welEditable);
+				$scope.$root.uploadFileToEditor(files[0], editor, welEditable);
 			}
 		};
 
-		Empresa.load().$promise.then(function (data) {
-			$scope.setEmpresa(data);
-		});
-
+		$scope.loadEmpresa = function () {
+			Empresa.load().$promise.then(function (data) {
+				$scope.setEmpresa(data);
+			});
+		};
+		$scope.loadEmpresa();
 		$scope.addDetalhe = function () {
 			$scope.empresa.detalhes.push(new Detalhe());
 		};
@@ -76,7 +61,7 @@ App.controller('EmpresaCtrl', ['$scope', 'editableOptions', 'editableThemes', 'E
 			parsleyForm.validate();
 			if (parsleyForm.isValid()) {
 				$scope.empresa.salvar().$promise.then(function (data) {
-					$scope.setEmpresa(new Empresa(data));
+					$scope.loadEmpresa();
 					$scope.$root.$broadcast("addAlert", "Empresa salva com sucesso", "success");
 				});
 			}

@@ -19,7 +19,7 @@ App.factory('SessionService', ['$http', function($http) {
 			return $http.get('server/sidebar-menu.json').success(function(data){
 				this.menus = data;
 				return data;
-			})
+			});
 		},
 		setPermissao : function(_permissao){
 			this.permissao = _permissao;
@@ -155,7 +155,7 @@ App.factory('SessionService', ['$http', function($http) {
 		'acesso/permissaoPorUsuario/:usuarioId/:pageNumber/:pageSize').save({
 			usuarioId : _usuarioId,
 			pageNumber: _pageNumber,
-			pageSize: _pageSize,
+			pageSize: _pageSize
 			
 		}, {'sorting': sorting, 'filter': {'search':filter}}, function (data) {
 			if(data && data.content && (typeof data.content !== undefined)){

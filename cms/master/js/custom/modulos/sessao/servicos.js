@@ -11,16 +11,16 @@ App
         
         Sessao.load = function(){
             return Server.query();
-        }
+        };	
         
         Sessao.prototype.salvar = function(){
            var self = this;
            return Server.save(self);
-        }
+        };
         Sessao.prototype.remover = function(){
            var self = this;
-           return Server.remove(this);
-        }
+           return Server.remove({'id': self.id});
+        };
 
 	return Sessao;
 }]);

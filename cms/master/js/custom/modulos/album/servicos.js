@@ -12,16 +12,16 @@ App
 
 				Album.load = function () {
 					return Server.query();
-				}
+				};
 
 				Album.prototype.salvar = function () {
 					var self = this;
 					return Server.save(self);
-				}
+				};
 				Album.prototype.remover = function () {
 					var self = this;
 					return Server.remove({'id': self.id});
-				}
+				};
 
 				return Album;
 			}]);

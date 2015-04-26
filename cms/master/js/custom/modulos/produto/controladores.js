@@ -13,31 +13,14 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 			height: 300, //set editable area's height
 			focus: true,
 			onImageUpload: function (files, editor, welEditable) {
-
-				function sendFile(file, editor, welEditable) {
-					data = new FormData();
-					data.append("file", file);
-					$.ajax({
-						data: data,
-						type: "POST",
-						url: "rest/index.php/imagem/" + $scope.produto.album.id,
-						cache: false,
-						contentType: false,
-						processData: false,
-						success: function (imagem) {
-							var img = new Imagem(JSON.parse(imagem));
-							editor.insertImage(welEditable, img.url);
-						}
-					});
-				}
-				sendFile(files[0], editor, welEditable);
+				$scope.$root.uploadFileToEditor(files[0], editor, welEditable);
 			}
 		};
 		$scope.addDetalhe = function () {
-			$scope.produto.detalhes.push(new Detalhe());
+			$scope.detalheInserted = new Detalhe();
+			$scope.produto.detalhes.push($scope.detalheInserted);
 		};
-		$scope.removerDetalhe = function (detalhe) {
-			var index = $scope.produto.detalhes.indexOf(detalhe);
+		$scope.removerDetalhe = function (index) {
 			if (index >= 0) {
 				$scope.produto.detalhes.splice(index, 1);
 			}
@@ -64,7 +47,7 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 		$scope.setCapa = function (img) {
 			img.setCapa();
 			$scope.setProduto($scope.produto);
-		}
+		};
 		$scope.tableParams = new ngTableParams({
 			page: 1, // show first page
 			count: 10, // count per page
@@ -73,10 +56,10 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 			}
 		}, {
 			getData: function ($defer, params) {
-				var loadData = function (credenciais) {
+				var loadData = function (data) {
 					// use build-in angular filter
 					var filteredData = params.filter() ?
-							$filter('filter')(credenciais, params.filter()) :
+							$filter('filter')(data, params.filter()) :
 							data;
 					var orderedData = params.sorting() ?
 							$filter('orderBy')(filteredData, params.orderBy()) :
@@ -98,7 +81,7 @@ App.controller('ProdutoCtrl', ['$scope', 'editableOptions', 'editableThemes', 'P
 					$scope.$root.$broadcast("addAlert", "Produto salvo com sucesso", "success");
 				});
 			}
-		}
+		};
 
 		$scope.temProduto = function () {
 			return $scope.produto !== undefined;
