@@ -25,6 +25,10 @@
 				span.btn-label
 					i.fa.fa-trash
 				| Remover
+			a.btn.btn-labeled.btn-success(href="",ng-dialog-scope='this', ng-dialog-data='{{jsonData}}', ng-dialog="modalImagensId", ng-dialog-controller='NullController', ng-dialog-class='ngdialog-mytheme', ng-dialog-show-close='true',ng-disabled="!temParceiro() || parceiro.id === undefined")
+				span.btn-label
+					i.fa.fa-file-image-o
+				| Imagens
 	#formParceiros.panel.panel-info(ng-if="temParceiro()")
 		.panel-heading
 			span.h4 {{parceiro.id +' - '+ parceiro.nome}}
@@ -46,22 +50,24 @@
 								.form-group
 									label.control-label(for="parceiro-slogan") Slogan *
 									input.form-control#parceiro-slogan(ng-model="parceiro.slogan",type='text', placeholder="Digite o slogan")
-	#formVerImagens.panel.panel-info(ng-if="temParceiro() && parceiro.id > 0")
-		.panel-heading
-			span.h4 Imagens do Parceiro
-			paneltool(tool-collapse)
-		.panel-wrapper(collapse="formVerImagens", ng-init="formVerImagens=true")
-			.panel-body
-				gallery(images="images", excluir-imagem='excluirImagem', set-capa="setCapa")
-				
-	#formParceiroImagens.panel.panel-info(ng-if="temParceiro() && parceiro.id > 0")
-		.panel-heading
-			span.h4 Upload de Imagens
-			paneltool(tool-collapse)
-		.panel-wrapper(collapse="formParceiroImagens", ng-init="formParceiroImagens=true")
-			.panel-body
-				form#formularioParceiroImagens(action="#",validate-form='', novalidate='')
-					fieldset
-						h3 Upload de Imagens
-						bs-image-upload(album="parceiro.album.id", on-upload="afterUpload")
-	
+
+script(type="text/ng-template", id="modalImagensId")
+	.ngdialog-content.bsdialog
+		#formVerImagens.panel.panel-info(ng-if="temParceiro() && parceiro.id > 0")
+			.panel-heading
+				span.h4 Imagens do Parceiro
+				paneltool(tool-collapse)
+			.panel-wrapper(collapse="formVerImagens", ng-init="formVerImagens=true")
+				.panel-body
+					gallery(images="images", excluir-imagem='excluirImagem', set-capa="setCapa")
+
+		#formParceiroImagens.panel.panel-info(ng-if="temParceiro() && parceiro.id > 0")
+			.panel-heading
+				span.h4 Upload de Imagens
+				paneltool(tool-collapse)
+			.panel-wrapper(collapse="formParceiroImagens", ng-init="formParceiroImagens=true")
+				.panel-body
+					form#formularioParceiroImagens(action="#",validate-form='', novalidate='')
+						fieldset
+							h3 Upload de Imagens
+							bs-image-upload(album="parceiro.album.id", on-upload="afterUpload")

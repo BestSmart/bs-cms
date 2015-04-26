@@ -146,4 +146,14 @@ App.run(['$rootScope', 'SessionService', '$state', '$http', 'Config', 'Imagem', 
 						});
 					}
 				};
-			}]);
+			}])
+		.directive('selectOnClick', function () {
+			return {
+				restrict: 'A',
+				link: function (scope, element, attrs) {
+					element.on('click', function () {
+						this.select();
+					});
+				}
+			};
+		});

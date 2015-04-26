@@ -6,9 +6,16 @@
 			span.btn.btn-default(ng-href="", ng-click="capa(img)", ng-class="{'btn btn-success':img.capa}")
 				i.icon-note
 				| capa
+			span.btn.btn-default(href="",ng-dialog-scope='this', ng-dialog-data='{"url":"{{img.url}}"}', ng-dialog="modalImagensId", ng-dialog-controller='NullController', ng-dialog-class='ngdialog-mytheme', ng-dialog-show-close='true')
+				i.fa.fa-external-link-square
+				|  url
 		.grid-item(data-src="{{img.url}}", data-sub-html="{{'#subhtml'+$index}}")
 			img.img-thumbnail.img-responsive(ng-src="{{img.thumbnail}}")
 			div(style="display:none;", id="{{'subhtml'+$index}}")
 				.customHtml
 					span
 						a(ng-href="{{img.url}}", target="_blank") {{img.url}}
+
+script(type="text/ng-template", id="modalImagensId")
+	.ngdialog-content.bsdialog
+		input.col-md-12(ng-model="ngDialogData.url", readonly, select-on-click)
